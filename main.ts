@@ -40,21 +40,21 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.flower, function (sprite, otherS
     animation.runImageAnimation(
     bee,
     [img`
-        ....111111..11111.......
-        ....111111..111111......
-        ....111111.1111111......
-        ....111111.1111111......
-        ....111111.1111111......
-        .....1111111111111......
-        ....5111111111111..111..
-        ...15f111511111f5551.1..
-        ..155f555f55555f5551.f..
-        11115f555f55555f5551....
-        .1155f555f55555f55511...
-        ...15f555f55555f5551.f..
-        .....f555ff5555f55511...
-        .........5f5555f55..11..
         ........................
+        .........11...111.......
+        ........1111.11111......
+        ........1111.11111......
+        ........111111111.......
+        ........111111111.......
+        .........1155555........
+        .........5f5555f55......
+        ......155f55555f555.....
+        ....11555f55555f555f....
+        ....11555f55555f555.....
+        ......155f55555f555f....
+        .......55ff5555f555.....
+        ........55f5555f55......
+        ............55555.......
         ........................
         `,img`
         ........................
@@ -62,16 +62,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.flower, function (sprite, otherS
         ........................
         ........................
         ........................
-        .....f5555f555ff55......
-        ....5f555ff5555f555111..
-        ...15f555f55555f5551.1..
-        ..155f555f55555f5551.f..
-        11115f555f55555f5551....
-        .1155f555f55555f55511...
-        ...15f555f55555f5551.f..
-        .....f555ff5555f55511...
-        .........5f555ff55..11..
         ........................
+        ...........55555........
+        .........5f5555f55......
+        ......155f55555f555.....
+        ....11555f55555f555f....
+        ....11555f55555f555.....
+        ......155f55555f555f....
+        .......55ff5555f555.....
+        ........55f5555f55......
+        ............55555.......
         ........................
         `],
     200,
@@ -80,120 +80,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.flower, function (sprite, otherS
     bee.setPosition(hop.x + 30, hop.y - 80)
     bee.follow(hop, 5000)
 })
-function startlevel () {
-    hop = sprites.create(img`
-        . . . . 4 4 4 . . . . 4 4 4 . . 
-        . . . 4 5 5 5 e . . e 5 5 5 4 . 
-        . . 4 5 5 5 5 5 e e 5 5 5 5 5 4 
-        . . 4 5 5 4 4 5 5 5 5 4 4 5 5 4 
-        . . e 5 4 4 5 5 5 5 5 5 4 4 5 e 
-        . . . e e 5 5 5 5 5 5 5 5 e e . 
-        . . . . e 5 f 5 5 5 5 f 5 e . . 
-        f f . . f 5 5 5 4 4 5 5 5 f . . 
-        f 5 f . f 6 5 5 f f 5 5 4 f . . 
-        f 5 5 f 4 4 6 6 6 6 6 6 f . . . 
-        . f 5 4 4 5 5 5 5 5 5 4 f . . . 
-        . . f f 5 5 4 5 5 5 5 5 f . . . 
-        . . . f 5 f f 5 f f f 5 f . . . 
-        . . . f f . . f f . . f f . . . 
-        `, SpriteKind.Player)
-    controller.moveSprite(hop, 100, 0)
-    tiles.setCurrentTilemap(tilemap`level1`)
-    hop.ay = 350
-    scene.cameraFollowSprite(hop)
-    info.setLife(5)
-    for (let value of tiles.getTilesByType(assets.tile`myTile2`)) {
-        coin2 = sprites.create(img`
-            . . b b b b . . 
-            . b 5 5 5 5 b . 
-            b 5 d 3 3 d 5 b 
-            b 5 3 5 5 1 5 b 
-            c 5 3 5 5 1 d c 
-            c d d 1 1 d d c 
-            . f d d d d f . 
-            . . f f f f . . 
-            `, SpriteKind.coin)
-        animation.runImageAnimation(
-        coin2,
-        [img`
-            . . b b b b . . 
-            . b 5 5 5 5 b . 
-            b 5 d 3 3 d 5 b 
-            b 5 3 5 5 1 5 b 
-            c 5 3 5 5 1 d c 
-            c d d 1 1 d d c 
-            . f d d d d f . 
-            . . f f f f . . 
-            `,img`
-            . . . b b . . . 
-            . . b 5 5 b . . 
-            . b 5 d 3 5 b . 
-            . b 5 3 5 5 b . 
-            . c 5 3 5 d c . 
-            . c 5 d 1 d c . 
-            . . f d d f . . 
-            . . . f f . . . 
-            `,img`
-            . . . b b . . . 
-            . . b 5 5 b . . 
-            . . b 1 1 b . . 
-            . . b 5 5 b . . 
-            . . b d d b . . 
-            . . c d d c . . 
-            . . c 3 3 c . . 
-            . . . f f . . . 
-            `,img`
-            . . . b b . . . 
-            . . b 5 5 b . . 
-            . b 5 1 d 5 b . 
-            . b 5 1 3 5 b . 
-            . c d 1 3 5 c . 
-            . c d d 1 5 c . 
-            . . f d d f . . 
-            . . . f f . . . 
-            `,img`
-            . . b b b b . . 
-            . b 5 5 5 5 b . 
-            b 5 d 3 3 d 5 b 
-            b 5 3 5 5 1 5 b 
-            c 5 3 5 5 1 d c 
-            c d d 1 1 d d c 
-            . f d d d d f . 
-            . . f f f f . . 
-            `],
-        150,
-        true
-        )
-        tiles.placeOnTile(coin2, value)
-        tiles.setTileAt(value, assets.tile`transparency16`)
-    }
-    for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
-        flower = sprites.create(img`
-            .........ccc........
-            ......cccc3cc.......
-            .....cc3c3c3c.......
-            .....c33ccbcc.......
-            .....cb3cb3b3c......
-            .....ccccccc3c......
-            .....c33bbc33c......
-            .....cc333cccc......
-            ......ccccc7..6.....
-            ...........7666.....
-            .......5..766.......
-            .......7776.........
-            ........76..........
-            ........6...........
-            ........6...........
-            ........6...........
-            ........66..........
-            .........6..........
-            ....................
-            ....................
-            `, SpriteKind.flower)
-        tiles.placeOnTile(flower, value)
-        tiles.setTileAt(value, assets.tile`transparency16`)
-    }
-}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
     if (hop.y < otherSprite.y) {
@@ -202,9 +88,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         info.changeScoreBy(-1)
     }
 })
-let coin2: Sprite = null
 let bee: Sprite = null
 let flower: Sprite = null
+let coin2: Sprite = null
 let hop: Sprite = null
 scene.setBackgroundColor(9)
 scene.setBackgroundImage(img`
@@ -329,3 +215,115 @@ scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     `)
+hop = sprites.create(img`
+    . . . . 4 4 4 . . . . 4 4 4 . . 
+    . . . 4 5 5 5 e . . e 5 5 5 4 . 
+    . . 4 5 5 5 5 5 e e 5 5 5 5 5 4 
+    . . 4 5 5 4 4 5 5 5 5 4 4 5 5 4 
+    . . e 5 4 4 5 5 5 5 5 5 4 4 5 e 
+    . . . e e 5 5 5 5 5 5 5 5 e e . 
+    . . . . e 5 f 5 5 5 5 f 5 e . . 
+    f f . . f 5 5 5 4 4 5 5 5 f . . 
+    f 5 f . f 6 5 5 f f 5 5 4 f . . 
+    f 5 5 f 4 4 6 6 6 6 6 6 f . . . 
+    . f 5 4 4 5 5 5 5 5 5 4 f . . . 
+    . . f f 5 5 4 5 5 5 5 5 f . . . 
+    . . . f 5 f f 5 f f f 5 f . . . 
+    . . . f f . . f f . . f f . . . 
+    `, SpriteKind.Player)
+controller.moveSprite(hop, 100, 0)
+tiles.setCurrentTilemap(tilemap`level1`)
+hop.ay = 350
+scene.cameraFollowSprite(hop)
+info.setLife(5)
+for (let value of tiles.getTilesByType(assets.tile`myTile2`)) {
+    coin2 = sprites.create(img`
+        . . b b b b . . 
+        . b 5 5 5 5 b . 
+        b 5 d 3 3 d 5 b 
+        b 5 3 5 5 1 5 b 
+        c 5 3 5 5 1 d c 
+        c d d 1 1 d d c 
+        . f d d d d f . 
+        . . f f f f . . 
+        `, SpriteKind.coin)
+    animation.runImageAnimation(
+    coin2,
+    [img`
+        . . b b b b . . 
+        . b 5 5 5 5 b . 
+        b 5 d 3 3 d 5 b 
+        b 5 3 5 5 1 5 b 
+        c 5 3 5 5 1 d c 
+        c d d 1 1 d d c 
+        . f d d d d f . 
+        . . f f f f . . 
+        `,img`
+        . . . b b . . . 
+        . . b 5 5 b . . 
+        . b 5 d 3 5 b . 
+        . b 5 3 5 5 b . 
+        . c 5 3 5 d c . 
+        . c 5 d 1 d c . 
+        . . f d d f . . 
+        . . . f f . . . 
+        `,img`
+        . . . b b . . . 
+        . . b 5 5 b . . 
+        . . b 1 1 b . . 
+        . . b 5 5 b . . 
+        . . b d d b . . 
+        . . c d d c . . 
+        . . c 3 3 c . . 
+        . . . f f . . . 
+        `,img`
+        . . . b b . . . 
+        . . b 5 5 b . . 
+        . b 5 1 d 5 b . 
+        . b 5 1 3 5 b . 
+        . c d 1 3 5 c . 
+        . c d d 1 5 c . 
+        . . f d d f . . 
+        . . . f f . . . 
+        `,img`
+        . . b b b b . . 
+        . b 5 5 5 5 b . 
+        b 5 d 3 3 d 5 b 
+        b 5 3 5 5 1 5 b 
+        c 5 3 5 5 1 d c 
+        c d d 1 1 d d c 
+        . f d d d d f . 
+        . . f f f f . . 
+        `],
+    150,
+    true
+    )
+    tiles.placeOnTile(coin2, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
+for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
+    flower = sprites.create(img`
+        .........ccc........
+        ......cccc3cc.......
+        .....cc3c3c3c.......
+        .....c33ccbcc.......
+        .....cb3cb3b3c......
+        .....ccccccc3c......
+        .....c33bbc33c......
+        .....cc333cccc......
+        ......ccccc7..6.....
+        ...........7666.....
+        .......5..766.......
+        .......7776.........
+        ........76..........
+        ........6...........
+        ........6...........
+        ........6...........
+        ........66..........
+        .........6..........
+        ....................
+        ....................
+        `, SpriteKind.flower)
+    tiles.placeOnTile(flower, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
