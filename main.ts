@@ -11,8 +11,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite2, location2) {
-    currant_level += 1
-    startlevel()
+    game.gameOver(true)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -189,6 +188,35 @@ function startlevel () {
         tiles.placeOnTile(flower, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
+    for (let value of tiles.getTilesByType(assets.tile`myTile7`)) {
+        fireball = sprites.create(img`
+            . . . . . . . . 4 . . . . . . . 
+            . . . . . . 2 . 4 5 . . . 2 . . 
+            . . 2 . . 1 . . 4 5 . . . . . . 
+            . . . . . 1 8 4 8 5 . . . . . . 
+            . . . . 1 8 4 2 . 8 . . . . . 5 
+            . . . 1 1 4 4 2 4 8 . . . . . . 
+            . 5 . . 4 4 4 2 4 8 . 1 2 . . . 
+            . . . 2 4 4 2 2 4 8 . 1 2 2 . . 
+            . . . 4 1 1 2 2 4 8 5 . 1 2 . . 
+            . 5 1 1 1 4 2 2 4 8 8 5 1 2 2 . 
+            5 5 1 . 4 2 2 . 2 4 8 . 8 8 2 5 
+            2 4 4 4 2 2 2 2 2 4 4 4 4 8 2 2 
+            2 4 2 2 . 2 2 2 2 2 8 . 8 4 1 2 
+            2 4 2 2 2 2 2 2 2 2 8 8 8 4 4 2 
+            5 2 5 5 5 5 8 4 4 4 4 8 8 8 8 2 
+            . . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            `, SpriteKind.flower)
+        tiles.placeOnTile(fireball, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+        animation.runMovementAnimation(
+        fireball,
+        "c 0 -100 0 100 0 0",
+        2000,
+        true
+        )
+        fireball.startEffect(effects.fire)
+    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
@@ -199,28 +227,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         info.changeScoreBy(-1)
     }
 })
+let fireball: Sprite = null
 let coin2: Sprite = null
 let flower: Sprite = null
 let bee: Sprite = null
 let currant_level = 0
 let hop: Sprite = null
-hop = sprites.create(img`
-    . . . . 4 4 4 . . . . 4 4 4 . . 
-    . . . 4 5 5 5 e . . e 5 5 5 4 . 
-    . . 4 5 5 5 5 5 e e 5 5 5 5 5 4 
-    . . 4 5 5 4 4 5 5 5 5 4 4 5 5 4 
-    . . e 5 4 4 5 5 5 5 5 5 4 4 5 e 
-    . . . e e 5 5 5 5 5 5 5 5 e e . 
-    . . . . e 5 f 5 5 5 5 f 5 e . . 
-    f f . . f 5 5 5 4 4 5 5 5 f . . 
-    f 5 f . f 6 5 5 f f 5 5 4 f . . 
-    f 5 5 f 4 4 6 6 6 6 6 6 f . . . 
-    . f 5 4 4 5 5 5 5 5 5 4 f . . . 
-    . . f f 5 5 4 5 5 5 5 5 f . . . 
-    . . . f 5 f f 5 f f f 5 f . . . 
-    . . . f f . . f f . . f f . . . 
-    `, SpriteKind.Player)
-controller.moveSprite(hop, 100, 0)
 scene.setBackgroundColor(9)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -344,7 +356,25 @@ scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     `)
-currant_level = 0
+hop = sprites.create(img`
+    . . . . 4 4 4 . . . . 4 4 4 . . 
+    . . . 4 5 5 5 e . . e 5 5 5 4 . 
+    . . 4 5 5 5 5 5 e e 5 5 5 5 5 4 
+    . . 4 5 5 4 4 5 5 5 5 4 4 5 5 4 
+    . . e 5 4 4 5 5 5 5 5 5 4 4 5 e 
+    . . . e e 5 5 5 5 5 5 5 5 e e . 
+    . . . . e 5 f 5 5 5 5 f 5 e . . 
+    f f . . f 5 5 5 4 4 5 5 5 f . . 
+    f 5 f . f 6 5 5 f f 5 5 4 f . . 
+    f 5 5 f 4 4 6 6 6 6 6 6 f . . . 
+    . f 5 4 4 5 5 5 5 5 5 4 f . . . 
+    . . f f 5 5 4 5 5 5 5 5 f . . . 
+    . . . f 5 f f 5 f f f 5 f . . . 
+    . . . f f . . f f . . f f . . . 
+    `, SpriteKind.Player)
+currant_level = 2
+controller.moveSprite(hop, 100, 0)
+hop.setBounceOnWall(false)
 startlevel()
 game.onUpdate(function () {
     hop.setImage(img`
@@ -414,7 +444,33 @@ game.onUpdate(function () {
             . f 5 f 5 f f 5 f f f 5 5 f . . 
             f 5 f f 5 f f 5 f . . f 5 f . . 
             `)
-    } else if (hop.vx < 0) {
+    }
+    if ((hop.isHittingTile(CollisionDirection.Left) || hop.isHittingTile(CollisionDirection.Right)) && hop.vy >= 0) {
+        hop.vy = 0
+        hop.ay = 0
+        hop.setImage(img`
+            . . 4 4 e . . . . . . . . . 
+            . 4 5 5 5 e . . . . . . . . 
+            4 5 5 5 4 e e f f . . . . . 
+            4 5 5 4 4 5 5 5 4 f f f f f 
+            4 5 5 4 5 5 f 5 5 6 4 5 5 f 
+            . e 5 5 5 5 5 5 5 6 5 5 f . 
+            . . e 5 5 5 5 4 f 6 5 5 f . 
+            . . e 5 5 5 5 4 f 6 5 5 f f 
+            . e 5 5 5 5 5 5 5 6 5 5 5 f 
+            4 5 5 4 5 5 f 5 5 6 5 4 f . 
+            4 5 5 4 4 5 5 5 6 4 5 5 f . 
+            4 5 5 5 4 e e f f 4 4 5 5 f 
+            . 4 5 5 5 e . . . f 4 f f f 
+            . . 4 4 e . . . f 5 5 f . . 
+            . . . . . . . f 5 5 f . . . 
+            . . . . . . . f f f . . . . 
+            `)
+    } else {
+        hop.ay = 350
+    }
+    if (hop.vx < 0 || hop.isHittingTile(CollisionDirection.Left)) {
         hop.image.flipX()
+        hop.setImage(hop.image)
     }
 })
